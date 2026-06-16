@@ -1,0 +1,429 @@
+fileFormatVersion: 2
+guid: b12b3f8f0b7a13b42bb56779619fc94a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8779063063274114104
+    second: LaserSpriteLeft_0
+  - first:
+      213: 6843052331725537527
+    second: LaserSpriteLeft_1
+  - first:
+      213: -8344545404884728860
+    second: LaserSpriteLeft_2
+  - first:
+      213: 290576862670387382
+    second: LaserSpriteLeft_3
+  - first:
+      213: -1017100978152848854
+    second: LaserSpriteLeft_4
+  - first:
+      213: 2548985746246291260
+    second: LaserSpriteLeft_5
+  - first:
+      213: -7617519074589169394
+    second: LaserSpriteLeft_6
+  - first:
+      213: 6539701972391163338
+    second: LaserSpriteLeft_7
+  - first:
+      213: 3447480709958816595
+    second: LaserSpriteLeft_8
+  - first:
+      213: -6370742299109969313
+    second: LaserSpriteLeft_9
+  - first:
+      213: -5487345485068625803
+    second: LaserSpriteLeft_10
+  - first:
+      213: -8340867981385041426
+    second: LaserSpriteLeft_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 15
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LaserSpriteLeft_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 136
+        width: 19
+        height: 22
+      alignment: 9
+      pivot: {x: 0.42105263, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83cc433b75f75d970800000000000000
+      internalID: 8779063063274114104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteLeft_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 136
+        width: 19
+        height: 22
+      alignment: 9
+      pivot: {x: 0.42105263, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f0c8e3f6d767fe50800000000000000
+      internalID: 6843052331725537527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteLeft_2
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 136
+        width: 20
+        height: 22
+      alignment: 9
+      pivot: {x: 0.45000002, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e34ab16a28323c80800000000000000
+      internalID: -8344545404884728860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteLeft_3
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 137
+        width: 21
+        height: 21
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.47619048}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b87a67fd16580400800000000000000
+      internalID: 290576862670387382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteLeft_4
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 136
+        width: 21
+        height: 22
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a224f789c0882e1f0800000000000000
+      internalID: -1017100978152848854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteLeft_5
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 102
+        width: 19
+        height: 22
+      alignment: 9
+      pivot: {x: 0.42105263, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3f4b86f701df5320800000000000000
+      internalID: 2548985746246291260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteLeft_6
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 42
+        width: 68
+        height: 22
+      alignment: 9
+      pivot: {x: 0.8382353, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e09a951d2c2294690800000000000000
+      internalID: -7617519074589169394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteLeft_7
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 73
+        width: 68
+        height: 22
+      alignment: 9
+      pivot: {x: 0.8382353, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac5fb498b40b1ca50800000000000000
+      internalID: 6539701972391163338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteLeft_8
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 103
+        width: 67
+        height: 22
+      alignment: 9
+      pivot: {x: 0.83582085, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3535b1fa079e7df20800000000000000
+      internalID: 3447480709958816595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteLeft_9
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 103
+        width: 19
+        height: 22
+      alignment: 9
+      pivot: {x: 0.42105263, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f52bef1f1a39697a0800000000000000
+      internalID: -6370742299109969313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteLeft_10
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 73
+        width: 21
+        height: 22
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57814a2ca5809d3b0800000000000000
+      internalID: -5487345485068625803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteLeft_11
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 72
+        width: 20
+        height: 22
+      alignment: 9
+      pivot: {x: 0.45000002, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee97d1343c84f3c80800000000000000
+      internalID: -8340867981385041426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: b56ea11bacdf3294799c30de6a6fe3b6
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      LaserSpriteLeft_0: 8779063063274114104
+      LaserSpriteLeft_1: 6843052331725537527
+      LaserSpriteLeft_10: -5487345485068625803
+      LaserSpriteLeft_11: -8340867981385041426
+      LaserSpriteLeft_2: -8344545404884728860
+      LaserSpriteLeft_3: 290576862670387382
+      LaserSpriteLeft_4: -1017100978152848854
+      LaserSpriteLeft_5: 2548985746246291260
+      LaserSpriteLeft_6: -7617519074589169394
+      LaserSpriteLeft_7: 6539701972391163338
+      LaserSpriteLeft_8: 3447480709958816595
+      LaserSpriteLeft_9: -6370742299109969313
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

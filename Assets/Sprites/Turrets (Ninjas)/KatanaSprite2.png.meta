@@ -1,0 +1,455 @@
+fileFormatVersion: 2
+guid: 44e293df8a4e00f488bd603de1d783de
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 9215106256565556953
+    second: KatanaSprite2_0
+  - first:
+      213: -64954611310196245
+    second: KatanaSprite2_1
+  - first:
+      213: -2590418972329589237
+    second: KatanaSprite2_2
+  - first:
+      213: 8532171104764406426
+    second: KatanaSprite2_3
+  - first:
+      213: -5017918654582634367
+    second: KatanaSprite2_4
+  - first:
+      213: 6198134100510042506
+    second: KatanaSprite2_5
+  - first:
+      213: -8923149683987340822
+    second: KatanaSprite2_6
+  - first:
+      213: -2258818795996355109
+    second: KatanaSprite2_7
+  - first:
+      213: 8741930511351375373
+    second: KatanaSprite2_8
+  - first:
+      213: 2316276996368639558
+    second: KatanaSprite2_9
+  - first:
+      213: -2387378041422776890
+    second: KatanaSprite2_10
+  - first:
+      213: -5603648234152296221
+    second: KatanaSprite2_11
+  - first:
+      213: 4874058654130223789
+    second: KatanaSprite2_12
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 15
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: KatanaSprite2_0
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 321
+        width: 24
+        height: 22
+      alignment: 9
+      pivot: {x: 0.4973465, y: 0.45408908}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d6d11e0152a2ef70800000000000000
+      internalID: 9215106256565556953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KatanaSprite2_1
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 317
+        width: 54
+        height: 43
+      alignment: 9
+      pivot: {x: 0.22275741, y: 0.23110962}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be9055a002c391ff0800000000000000
+      internalID: -64954611310196245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KatanaSprite2_2
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 317
+        width: 54
+        height: 43
+      alignment: 9
+      pivot: {x: 0.20652997, y: 0.23641542}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b06ccd65babfc0cd0800000000000000
+      internalID: -2590418972329589237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KatanaSprite2_3
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 323
+        width: 71
+        height: 30
+      alignment: 9
+      pivot: {x: 0.15566029, y: 0.3350596}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9aa5561a6c586670800000000000000
+      internalID: 8532171104764406426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KatanaSprite2_4
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 211
+        width: 70
+        height: 81
+      alignment: 9
+      pivot: {x: 0.065661184, y: 0.8498064}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 188cbc9d195cc5ab0800000000000000
+      internalID: -5017918654582634367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KatanaSprite2_5
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 213
+        width: 81
+        height: 78
+      alignment: 9
+      pivot: {x: 0.8260975, y: 0.8599556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a89e2231022340650800000000000000
+      internalID: 6198134100510042506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KatanaSprite2_6
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 217
+        width: 68
+        height: 70
+      alignment: 9
+      pivot: {x: 0.9052362, y: 0.14121813}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae1ab48a3aa9a2480800000000000000
+      internalID: -8923149683987340822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KatanaSprite2_7
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 104
+        width: 62
+        height: 74
+      alignment: 9
+      pivot: {x: 0.23107849, y: 0.12680548}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd569a4d54017a0e0800000000000000
+      internalID: -2258818795996355109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KatanaSprite2_8
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 107
+        width: 72
+        height: 71
+      alignment: 9
+      pivot: {x: 0.16775788, y: 0.13682309}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d066f3cbb73915970800000000000000
+      internalID: 8741930511351375373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KatanaSprite2_9
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 101
+        width: 78
+        height: 59
+      alignment: 9
+      pivot: {x: 0.1725488, y: 0.17368169}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64626f1f7a1152020800000000000000
+      internalID: 2316276996368639558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KatanaSprite2_10
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 62
+        width: 64
+        height: 21
+      alignment: 9
+      pivot: {x: 0.19972038, y: 0.44232905}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c57d68f1545eded0800000000000000
+      internalID: -2387378041422776890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KatanaSprite2_11
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 62
+        width: 65
+        height: 20
+      alignment: 9
+      pivot: {x: 0.19847694, y: 0.4075695}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e08b15de97db32b0800000000000000
+      internalID: -5603648234152296221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KatanaSprite2_12
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 60
+        width: 65
+        height: 22
+      alignment: 9
+      pivot: {x: 0.20010611, y: 0.4576246}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daab9d5a58224a340800000000000000
+      internalID: 4874058654130223789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 98f2287821e97b94bbe26bdad6a14ccb
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      KatanaSprite2_0: 9215106256565556953
+      KatanaSprite2_1: -64954611310196245
+      KatanaSprite2_10: -2387378041422776890
+      KatanaSprite2_11: -5603648234152296221
+      KatanaSprite2_12: 4874058654130223789
+      KatanaSprite2_2: -2590418972329589237
+      KatanaSprite2_3: 8532171104764406426
+      KatanaSprite2_4: -5017918654582634367
+      KatanaSprite2_5: 6198134100510042506
+      KatanaSprite2_6: -8923149683987340822
+      KatanaSprite2_7: -2258818795996355109
+      KatanaSprite2_8: 8741930511351375373
+      KatanaSprite2_9: 2316276996368639558
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

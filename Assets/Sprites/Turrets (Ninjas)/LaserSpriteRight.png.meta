@@ -1,0 +1,429 @@
+fileFormatVersion: 2
+guid: f7cb4826dfee61a4db2b62c539a59ddb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 754473945224929742
+    second: LaserSpriteRight_0
+  - first:
+      213: 894022487514735828
+    second: LaserSpriteRight_1
+  - first:
+      213: 7563039039128952385
+    second: LaserSpriteRight_2
+  - first:
+      213: -1019041356747437361
+    second: LaserSpriteRight_3
+  - first:
+      213: -5845280422478902480
+    second: LaserSpriteRight_4
+  - first:
+      213: 5994585488052587016
+    second: LaserSpriteRight_5
+  - first:
+      213: 2197713774581304897
+    second: LaserSpriteRight_6
+  - first:
+      213: 6725472851578686040
+    second: LaserSpriteRight_7
+  - first:
+      213: -2106262962034752622
+    second: LaserSpriteRight_8
+  - first:
+      213: -1697663239065741607
+    second: LaserSpriteRight_9
+  - first:
+      213: -5246939035527031555
+    second: LaserSpriteRight_10
+  - first:
+      213: 8862627239909080278
+    second: LaserSpriteRight_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 15
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LaserSpriteRight_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 136
+        width: 21
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5714286, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec16b694e0e687a00800000000000000
+      internalID: 754473945224929742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteRight_1
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 137
+        width: 21
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5714286, y: 0.47619048}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d4e68537b4386c00800000000000000
+      internalID: 894022487514735828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteRight_2
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 136
+        width: 20
+        height: 22
+      alignment: 9
+      pivot: {x: 0.55, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14e51b57fef45f860800000000000000
+      internalID: 7563039039128952385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteRight_3
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 136
+        width: 19
+        height: 22
+      alignment: 9
+      pivot: {x: 0.57894737, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fca03aff843abd1f0800000000000000
+      internalID: -1019041356747437361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteRight_4
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 136
+        width: 19
+        height: 22
+      alignment: 9
+      pivot: {x: 0.57894737, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03b8995ec6461eea0800000000000000
+      internalID: -5845280422478902480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteRight_5
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 103
+        width: 19
+        height: 22
+      alignment: 9
+      pivot: {x: 0.57894737, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80a061f9dbb013350800000000000000
+      internalID: 5994585488052587016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteRight_6
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 103
+        width: 68
+        height: 22
+      alignment: 9
+      pivot: {x: 0.16176471, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14ec6e3b809df7e10800000000000000
+      internalID: 2197713774581304897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteRight_7
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 70
+        width: 68
+        height: 22
+      alignment: 9
+      pivot: {x: 0.16176471, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85a81e8eceda55d50800000000000000
+      internalID: 6725472851578686040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteRight_8
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 41
+        width: 68
+        height: 22
+      alignment: 9
+      pivot: {x: 0.16176471, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2934b58defc05c2e0800000000000000
+      internalID: -2106262962034752622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteRight_9
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 102
+        width: 19
+        height: 22
+      alignment: 9
+      pivot: {x: 0.57894737, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d65f375740b078e0800000000000000
+      internalID: -1697663239065741607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteRight_10
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 72
+        width: 20
+        height: 22
+      alignment: 9
+      pivot: {x: 0.55, y: 0.54545456}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df4d7452fb02f27b0800000000000000
+      internalID: -5246939035527031555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserSpriteRight_11
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 71
+        width: 21
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5714286, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dc3b7bb4806efa70800000000000000
+      internalID: 8862627239909080278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 89438700f97b5b446b8801851a7cbf5d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      LaserSpriteRight_0: 754473945224929742
+      LaserSpriteRight_1: 894022487514735828
+      LaserSpriteRight_10: -5246939035527031555
+      LaserSpriteRight_11: 8862627239909080278
+      LaserSpriteRight_2: 7563039039128952385
+      LaserSpriteRight_3: -1019041356747437361
+      LaserSpriteRight_4: -5845280422478902480
+      LaserSpriteRight_5: 5994585488052587016
+      LaserSpriteRight_6: 2197713774581304897
+      LaserSpriteRight_7: 6725472851578686040
+      LaserSpriteRight_8: -2106262962034752622
+      LaserSpriteRight_9: -1697663239065741607
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
