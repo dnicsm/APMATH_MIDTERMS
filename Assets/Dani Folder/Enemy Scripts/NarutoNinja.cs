@@ -17,10 +17,17 @@ public class NarutoNinja : MonoBehaviour
     private GameObject playerHM;
     private EnemySFX sfx;
 
+    // Hook to connect with your updated status effect script
+    private EnemyHealthManager healthManager;
+
     void Start()
     {
         sfx = GetComponentInChildren<EnemySFX>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // Cache the health manager script living on this enemy instance
+        healthManager = GetComponent<EnemyHealthManager>();
+        if (healthManager == null) healthManager = GetComponentInChildren<EnemyHealthManager>();
 
         playerHM = GameObject.FindWithTag("PlayerHealth");
         if (playerHM != null)
@@ -43,7 +50,7 @@ public class NarutoNinja : MonoBehaviour
             }
         }
 
-        if (pathPoints.Length >= 4)
+        if (pathPoints != null && pathPoints.Length >= 4)
         {
             p0 = pathPoints[0].transform.position;
             p1 = pathPoints[1].transform.position;
@@ -59,7 +66,17 @@ public class NarutoNinja : MonoBehaviour
         if (pathPoints == null || pathPoints.Length < 4)
             return;
 
-        t += Time.deltaTime * speed;
+        // 1. STUN CHECK: Freeze movement instantly if stun status conditions are active
+        if (healthManager != null && !healthManager.canMove)
+        {
+            return; // Stops frame delta evaluations and locks the ninja in its position
+        }
+
+        // 2. SLOW FACTOR CHECK: Read current tower movement speed modifiers
+        float activeSlowFactor = (healthManager != null) ? healthManager.currentSlowFactor : 1f;
+
+        // Progress path tracking factor scaled down by active status modifiers
+        t += Time.deltaTime * speed * activeSlowFactor;
         t = Mathf.Clamp01(t);
 
         transform.position = CubicFast(p0, p1, p2, p3, t);

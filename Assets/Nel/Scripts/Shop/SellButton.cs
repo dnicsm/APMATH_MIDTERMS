@@ -4,8 +4,7 @@ public class SellButton : MonoBehaviour
 {
     public void SellTurret()
     {
-        TurretSpot spot =
-            UpgradeSell.Instance.GetSelectedSpot();
+        TurretSpot spot = UpgradeSell.Instance.GetSelectedSpot();
 
         if (spot == null)
             return;
@@ -13,20 +12,16 @@ public class SellButton : MonoBehaviour
         if (spot.currentTurret == null)
             return;
 
-        TurretData data =
-            spot.currentTurret.GetComponent<TurretData>();
+        TowerBehaviors tower = spot.currentTurret.GetComponent<TowerBehaviors>();
 
-        if (data != null)
+        if (tower != null)
         {
-            int refund =
-                Mathf.RoundToInt(
-                    data.cost * 0.5f);
+            int refund = tower.towerSellValue;
 
             CoinManager.Instance.AddCoins(refund);
         }
 
         Destroy(spot.currentTurret);
-
         spot.currentTurret = null;
 
         UpgradeSell.Instance.Hide();

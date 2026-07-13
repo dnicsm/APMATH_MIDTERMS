@@ -4,8 +4,7 @@ public class UpgradeButton : MonoBehaviour
 {
     public void UpgradeTurret()
     {
-        TurretSpot spot =
-            UpgradeSell.Instance.GetSelectedSpot();
+        TurretSpot spot = UpgradeSell.Instance.GetSelectedSpot();
 
         if (spot == null)
             return;
@@ -13,34 +12,26 @@ public class UpgradeButton : MonoBehaviour
         if (spot.currentTurret == null)
             return;
 
-        TurretData data =
-            spot.currentTurret.GetComponent<TurretData>();
+        TowerBehaviors tower = spot.currentTurret.GetComponent<TowerBehaviors>();
 
-        if (data == null)
+        if (tower == null)
             return;
 
-        if (data.nextLevelPrefab == null)
+        if (tower.towerLevel >= 3)
+        {
+            Debug.LogWarning("Tower is already max level!");
             return;
+        }
 
-        TurretData nextData =
-            data.nextLevelPrefab.GetComponent<TurretData>();
+        int costToUpgrade = tower.towerUpgradeCost;
 
-        if (nextData == null)
+        if (!CoinManager.Instance.SpendCoins(costToUpgrade))
+        {
+            Debug.LogWarning("Not enough coins to upgrade!");
             return;
+        }
 
-        if (!CoinManager.Instance.SpendCoins(nextData.cost))
-            return;
-
-        Quaternion rot =
-            spot.currentTurret.transform.rotation;
-
-        Destroy(spot.currentTurret);
-
-        spot.currentTurret =
-            Instantiate(
-                data.nextLevelPrefab,
-                spot.transform.position,
-                rot);
+        tower.UpgradeTower();
 
         UpgradeSell.Instance.Hide();
     }

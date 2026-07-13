@@ -4,12 +4,11 @@ public class PreviewManager : MonoBehaviour
 {
     public static PreviewManager Instance;
 
+    [Header("Visual References")]
     public GameObject rangeCirclePrefab;
 
-    GameObject previewTower;
-    GameObject rangeCircle;
-
-    float currentRotation;
+    private GameObject previewTower;
+    private GameObject rangeCircle;
 
     private void Awake()
     {
@@ -25,9 +24,8 @@ public class PreviewManager : MonoBehaviour
         {
             HidePreview();
 
-            currentRotation = 0f;
-
-            previewTower = Instantiate(turretPrefab, position, Quaternion.identity);
+            Quaternion currentPlacerRot = TurretPlacer.Instance.GetSelectedRotation();
+            previewTower = Instantiate(turretPrefab, position, currentPlacerRot);
 
             DisableTurretBehaviour(previewTower);
 
@@ -38,7 +36,6 @@ public class PreviewManager : MonoBehaviour
         rangeCircle.transform.position = position;
 
         UpdateRange();
-        UpdatePreviewVisuals();
     }
 
     public void HidePreview()
@@ -50,7 +47,7 @@ public class PreviewManager : MonoBehaviour
             Destroy(rangeCircle);
     }
 
-    void DisableTurretBehaviour(GameObject tower)
+    private void DisableTurretBehaviour(GameObject tower)
     {
         MonoBehaviour[] scripts = tower.GetComponents<MonoBehaviour>();
 
@@ -60,68 +57,26 @@ public class PreviewManager : MonoBehaviour
         }
     }
 
-    void UpdateRange()
+    private void UpdateRange()
     {
         if (previewTower == null || rangeCircle == null)
             return;
 
         float range = 1f;
 
-
-        LaserTurret laser = previewTower.GetComponent<LaserTurret>();
-        if (laser != null)
-            range = laser.laserRange;
-
-        KatanaTurret katana = previewTower.GetComponent<KatanaTurret>();
-        if (katana != null)
-            range = katana.radius;
-
-        ShurikenTurret shuriken = previewTower.GetComponent<ShurikenTurret>();
-        if (shuriken != null)
-            range = shuriken.range;
+        TowerBehaviors towerScript = previewTower.GetComponent<TowerBehaviors>();
+        if (towerScript != null)
+        {
+            range = towerScript.towerRange;
+        }
 
         rangeCircle.transform.localScale = Vector3.one * range * 2f;
     }
-
-    public void RotatePreview(float amount)
+    public void UpdatePreviewRotation(Quaternion newRotation)
     {
-        if (previewTower == null)
-            return;
-
-        currentRotation += amount;
-
-        UpdatePreviewVisuals();
-    }
-
-    public Quaternion GetRotation()
-    {
-        return Quaternion.Euler(0, 0, currentRotation);
-    }
-
-    private void UpdatePreviewVisuals()
-    {
-        if (previewTower == null) return;
-
-        LaserTurret laserScript = previewTower.GetComponent<LaserTurret>();
-        if (laserScript == null) return; 
-
-        Animator previewAnim = previewTower.GetComponent<Animator>();
-        if (previewAnim == null) return;
-
-        previewTower.transform.rotation = Quaternion.identity;
-
-        float zAngle = Mathf.Round((currentRotation % 360f + 360f) % 360f);
-
-        string animBaseName = "";
-
-        if (zAngle == 0f || zAngle == 360f)      { animBaseName = "LaserFront"; }
-        else if (zAngle == 90f)                 { animBaseName = "LaserRight"; }
-        else if (zAngle == 180f)                { animBaseName = "LaserBack"; }
-        else if (zAngle == 270f)                { animBaseName = "LaserLeft"; }
-
-        int lvl = laserScript.laserLevel; 
-        string finalAnimName = $"{animBaseName}{lvl}";
-        
-        previewAnim.Play(finalAnimName);
+        if (previewTower != null)
+        {
+            previewTower.transform.rotation = newRotation;
+        }
     }
 }

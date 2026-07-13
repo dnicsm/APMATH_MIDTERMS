@@ -17,10 +17,17 @@ public class BasicNinja : MonoBehaviour
     private GameObject playerHM;
     private EnemySFX sfx;
 
+    // Hook to connect with your updated status script
+    private EnemyHealthManager healthManager;
+
     void Start()
     {
         sfx = GetComponentInChildren<EnemySFX>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // Find and store the health component attached to this ninja instance
+        healthManager = GetComponent<EnemyHealthManager>();
+        if (healthManager == null) healthManager = GetComponentInChildren<EnemyHealthManager>();
 
         playerHM = GameObject.FindWithTag("PlayerHealth");
         if (playerHM != null)
@@ -43,7 +50,7 @@ public class BasicNinja : MonoBehaviour
             }
         }
 
-        if (pathPoints.Length >= 4)
+        if (pathPoints != null && pathPoints.Length >= 4)
         {
             p0 = pathPoints[0].transform.position;
             p1 = pathPoints[1].transform.position;
@@ -59,7 +66,17 @@ public class BasicNinja : MonoBehaviour
         if (pathPoints == null || pathPoints.Length < 4)
             return;
 
-        t += Time.deltaTime * speed;
+        // 1. STUN INTERACTION: If health manager says we cannot move, freeze frame instantly
+        if (healthManager != null && !healthManager.canMove)
+        {
+            return; // Skips time increments and position updates entirely this frame
+        }
+
+        // 2. SLOW INTERACTION: Get the slow factor from healthManager (defaults to 1f)
+        float activeSlowFactor = (healthManager != null) ? healthManager.currentSlowFactor : 1f;
+
+        // Multiply path delta time progression by the slow factor
+        t += Time.deltaTime * speed * activeSlowFactor;
         t = Mathf.Clamp01(t);
 
         transform.position = CubicFast(p0, p1, p2, p3, t);

@@ -2478,7 +2478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopButton
   turretPrefab: {fileID: 2078569306442432400, guid: 609ce30e3fc6f654d97d30b821383250, type: 3}
-  cost: 20
+  costText: {fileID: 0}
 --- !u!1 &129758778
 GameObject:
   m_ObjectHideFlags: 0
@@ -2626,7 +2626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopButton
   turretPrefab: {fileID: 4314525365680569349, guid: ed42d3d26ae0561479956971fbb33a5b, type: 3}
-  cost: 10
+  costText: {fileID: 0}
 --- !u!1 &131267811
 GameObject:
   m_ObjectHideFlags: 0
@@ -4722,7 +4722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopButton
   turretPrefab: {fileID: 8000114402318008750, guid: 88f2d7b54455b5245adb9e25dd4ed34e, type: 3}
-  cost: 25
+  costText: {fileID: 0}
 --- !u!1 &280671249
 GameObject:
   m_ObjectHideFlags: 0
@@ -11201,7 +11201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopButton
   turretPrefab: {fileID: 9213748552337680257, guid: f6ccbdf886994fc4695f3724cb1fcdb8, type: 3}
-  cost: 50
+  costText: {fileID: 0}
 --- !u!1 &553118886
 GameObject:
   m_ObjectHideFlags: 0
@@ -11951,7 +11951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopButton
   turretPrefab: {fileID: 2072535665654634573, guid: 9ecf7ad8160720e4797fbf028cbba3f4, type: 3}
-  cost: 20
+  costText: {fileID: 0}
 --- !u!114 &600914486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20624,7 +20624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopButton
   turretPrefab: {fileID: 505259865203857925, guid: 93be6344c901b3e44a55658563b81626, type: 3}
-  cost: 80
+  costText: {fileID: 0}
 --- !u!1 &1350828718
 GameObject:
   m_ObjectHideFlags: 0
@@ -45131,7 +45131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopButton
   turretPrefab: {fileID: 604014396470642729, guid: 3a0d6f9062c170a4ca2b885e4d2410c6, type: 3}
-  cost: 100
+  costText: {fileID: 0}
 --- !u!1 &1866335287
 GameObject:
   m_ObjectHideFlags: 0
@@ -45716,8 +45716,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ba2fe40f5f6514693b057b008c1b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopButton
-  turretPrefab: {fileID: 2255428390917970212, guid: da71e181b413386478448d55ad9ec29d, type: 3}
-  cost: 15
+  turretPrefab: {fileID: 4326514398708951708, guid: d61e50f9a494a450c9ce724f99b0974c, type: 3}
+  costText: {fileID: 0}
 --- !u!1 &1889295751
 GameObject:
   m_ObjectHideFlags: 0
@@ -48536,7 +48536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopButton
   turretPrefab: {fileID: 9208554278284013594, guid: 2d032e962a34d8d44ad344d8ee5d032f, type: 3}
-  cost: 15
+  costText: {fileID: 0}
 --- !u!1 &2135068269
 GameObject:
   m_ObjectHideFlags: 0

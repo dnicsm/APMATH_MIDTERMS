@@ -22,15 +22,18 @@ public class BlinkNinja : MonoBehaviour
     private GameObject playerHM;
     private EnemySFX sfx;
 
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         sfx = GetComponentInChildren<EnemySFX>();
         enemyHealth = GetComponentInChildren<EnemyHealthManager>();
+        
+        // Defensive check to make sure enemyHealth is cached if it lives on a parent/child object
+        if (enemyHealth == null) enemyHealth = GetComponent<EnemyHealthManager>();
+
         playerHM = GameObject.FindWithTag("PlayerHealth");
-        playerHit = playerHM.GetComponent<PlayerHealth>();
+        if (playerHM != null)
+            playerHit = playerHM.GetComponent<PlayerHealth>();
+            
         setSpeed = speed;
         animator = GetComponent<Animator>();
         GameObject pathParent = GameObject.Find("Path Control");
@@ -50,7 +53,7 @@ public class BlinkNinja : MonoBehaviour
             }
         }
 
-        if (pathPoints.Length >= 4)
+        if (pathPoints != null && pathPoints.Length >= 4)
         {
             p0 = pathPoints[0].transform.position;
             p1 = pathPoints[1].transform.position;
@@ -63,13 +66,29 @@ public class BlinkNinja : MonoBehaviour
         InvokeRepeating("BlinkTimer", BlinkInterval, BlinkInterval);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (pathPoints == null || pathPoints.Length < 4)
             return;
 
-        t += Time.deltaTime * speed;
+        // 1. STUN & INTERRUPT INTERACTION: Freeze movement if stunned by the Bell Tower
+        if (enemyHealth != null && !enemyHealth.canMove)
+        {
+            // If the Bell Tower hits while this ninja is mid-blink, interrupt it!
+            if (enemyHealth.isBlinking)
+            {
+                CancelInvoke(nameof(Unblink)); // Stop the scheduled Unblink timing loop
+                Unblink();                     // Forcefully exit the blink state early
+                Debug.Log("Blink Skill Interrupted by Shockwave!");
+            }
+            return; // Stop processing path progression this frame
+        }
+
+        // 2. SLOW INTERACTION: Scale speed by the current slow factor applied from towers
+        float activeSlowFactor = (enemyHealth != null) ? enemyHealth.currentSlowFactor : 1f;
+
+        // Progress along the curve
+        t += Time.deltaTime * speed * activeSlowFactor;
         t = Mathf.Clamp01(t);
 
         transform.position = CubicFast(p0, p1, p2, p3, t);
@@ -92,7 +111,6 @@ public class BlinkNinja : MonoBehaviour
                 nextControlIndex += 3;
             }
         }
-
     }
 
     public static Vector3 CubicFast(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
@@ -107,29 +125,32 @@ public class BlinkNinja : MonoBehaviour
 
     void Blink()
     {
+        // Don't start a blink if we are currently stunned or slowed to zero speed
+        if (enemyHealth != null && !enemyHealth.canMove) return;
+
         enemyHealth.isBlinking = true;
         var sprite = GetComponent<SpriteRenderer>();
-        animator.SetBool("Blink", true);
+        if (animator != null) animator.SetBool("Blink", true);
+        
         t += 0.15f;
-        Invoke("Unblink", 0.15f);
+        Invoke(nameof(Unblink), 0.15f);
     }
 
     void Unblink()
     {
-        enemyHealth.isBlinking = false;
+        if (enemyHealth != null) enemyHealth.isBlinking = false;
         speed = setSpeed;
-        animator.SetBool("Blink", false);
+        if (animator != null) animator.SetBool("Blink", false);
         var sprite = GetComponent<SpriteRenderer>();
     }
     
-
     void BlinkTimer()
     {
         if (Random.value < BlinkChance)
-            {
-                Debug.Log("Blinking!");
-                Blink();
-            }
+        {
+            Debug.Log("Blinking!");
+            Blink();
+        }
     }
 
     void PlayerDeath()
@@ -144,5 +165,4 @@ public class BlinkNinja : MonoBehaviour
 
         Destroy(gameObject);
     }
-
 }

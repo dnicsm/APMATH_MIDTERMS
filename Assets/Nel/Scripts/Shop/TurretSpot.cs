@@ -8,7 +8,6 @@ public class TurretSpot : MonoBehaviour
 
     public GameObject PlaceTurret(GameObject prefab, Quaternion rotation)
     {
-
         int costToPay = TurretPlacer.Instance.GetSelectedCost();
 
         if (!CoinManager.Instance.SpendCoins(costToPay))
@@ -21,6 +20,15 @@ public class TurretSpot : MonoBehaviour
             transform.position,
             rotation
         );
+
+        TowerBehaviors towerScript = currentTurret.GetComponent<TowerBehaviors>();
+        if (towerScript != null)
+        {
+            towerScript.towerLevel = 1;
+            towerScript.UpdateSellValue();
+
+            towerScript.facingDirection = (Vector2)currentTurret.transform.up;
+        }
 
         return currentTurret;
     }
