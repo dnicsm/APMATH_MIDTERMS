@@ -17049,7 +17049,7 @@ MonoBehaviour:
       shadowNinjaCount: 2
       echoShinobiCount: 2
       arashiBossCount: 2
-  level: 1
+  level: 3
   isSettingUp: 0
   PathArrows:
   - {fileID: 1655438379}

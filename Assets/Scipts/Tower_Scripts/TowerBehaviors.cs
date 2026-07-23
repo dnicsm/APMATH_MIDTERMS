@@ -274,7 +274,6 @@ public class TowerBehaviors : MonoBehaviour
         {
             if (enemy == null) continue;
 
-            // Any enemy inside the lantern's range is revealed 360 degrees
             if (Vector2.Distance(origin, enemy.transform.position) <= towerRange)
             {
                 enemy.BroadcastMessage("PingLanternLight", SendMessageOptions.DontRequireReceiver);

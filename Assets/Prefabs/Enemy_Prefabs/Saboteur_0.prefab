@@ -115,8 +115,8 @@ MonoBehaviour:
   currentHealth: 100
   speed: 0.1
   damageToPlayer: 5
-  isInvisible: 1
-  isLanternRevealed: 1
+  isInvisible: 0
+  isLanternRevealed: 0
   saboteurRadius: 4
   towerLayer:
     serializedVersion: 2

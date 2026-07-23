@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour
     public float damageToPlayer = 3f;
 
     [Header("Stealth & Visibility Settings")]
-    public bool isInvisible = true;
+    public bool isInvisible = false;
     public bool isLanternRevealed = false;
     private float lanternRevealTimer = 0f;
 
@@ -96,6 +96,16 @@ public class EnemyController : MonoBehaviour
         UpdateVisualOverlay();
     }
 
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        
+        if (enemyType == EnemyType.SmokeBomber)
+        {
+            CheckSmokeBombTrigger();
+        }
+    }
+
     public void PingLanternLight()
     {
         lanternRevealTimer = 0.25f; 
@@ -109,7 +119,6 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        // --- 1. Path Movement Loop ---
         if (canMove && pathPoints != null && pathPoints.Length >= 4)
         {
             t += Time.deltaTime * (speed * currentSlowFactor);
@@ -121,7 +130,6 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        // --- 2. Stealth & Light Detection ---
         if (lanternRevealTimer > 0f)
         {
             lanternRevealTimer -= Time.deltaTime;
@@ -136,7 +144,6 @@ public class EnemyController : MonoBehaviour
 
         UpdateVisualOverlay();
 
-        // --- 3. Active Enemy Ability Ticks ---
         if (enemyType == EnemyType.Saboteur)
         {
             ExecuteSaboteurAura();
@@ -153,27 +160,31 @@ public class EnemyController : MonoBehaviour
 
         float alpha = 1f;
 
-        // Ninja remains 100% opaque as long as revealed by Lantern
         if (isInvisible && !isLanternRevealed)
         {
-            alpha = 0.3f; // Invisible stealth state
+            alpha = 0.3f; 
         }
         else if (isClone)
         {
-            alpha = 0.6f; // Echo clone state
+            alpha = 0.6f; 
         }
 
-        spriteRenderer.color = new Color(1f, 1f, 1f, alpha);
+        Color currentColor = spriteRenderer.color;
+        spriteRenderer.color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
     }
 
     #region Enemy Behaviors
 
-    private void CheckSmokeBombTrigger()
+    public void CheckSmokeBombTrigger()
     {
-        float currentHp = (healthManager != null) ? healthManager.MaxHealth - (healthManager.MaxHealth - GetCurrentHealth()) : currentHealth;
+        if (enemyType != EnemyType.SmokeBomber) return;
+
+        if (hasTriggeredSmoke) return;
+
+        float hp = (healthManager != null) ? healthManager.CurrentHealth : currentHealth;
         float maxHp = (healthManager != null) ? healthManager.MaxHealth : maxHealth;
 
-        if (!hasTriggeredSmoke && (currentHp / maxHp) < 0.5f)
+        if ((hp / maxHp) <= 0.5f)
         {
             hasTriggeredSmoke = true;
             StartCoroutine(ActivateSmokeBomb());
@@ -184,10 +195,15 @@ public class EnemyController : MonoBehaviour
     {
         if (healthManager != null)
         {
-            return (float)typeof(EnemyHealthManager)
-                .GetField("CurrentHealth", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-                ?.GetValue(healthManager);
+            var prop = typeof(EnemyHealthManager).GetProperty("CurrentHealth");
+            if (prop != null) return (float)prop.GetValue(healthManager);
+
+            var field = typeof(EnemyHealthManager).GetField("CurrentHealth", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+                     ?? typeof(EnemyHealthManager).GetField("currentHealth", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+            if (field != null) return (float)field.GetValue(healthManager);
         }
+
         return currentHealth;
     }
 
@@ -282,19 +298,41 @@ public class EnemyController : MonoBehaviour
             yield return new WaitForSeconds(cloneInterval);
 
             GameObject clone = Instantiate(gameObject, transform.position, Quaternion.identity);
+
+            Collider2D parentCol = GetComponent<Collider2D>();
+            Collider2D cloneCol = clone.GetComponent<Collider2D>();
+            if (parentCol != null && cloneCol != null)
+            {
+                Physics2D.IgnoreCollision(parentCol, cloneCol);
+            }
+
             EnemyController cloneScript = clone.GetComponent<EnemyController>();
-            
             if (cloneScript != null)
             {
-                cloneScript.isClone = true;
-                cloneScript.t = this.t;
-                cloneScript.nextControlIndex = this.nextControlIndex;
-                cloneScript.p0 = this.p0;
-                cloneScript.p1 = this.p1;
-                cloneScript.p2 = this.p2;
-                cloneScript.p3 = this.p3;
+                cloneScript.InitializeClone(this.p0, this.p1, this.p2, this.p3, this.t, this.nextControlIndex);
             }
         }
+    }
+
+    public void InitializeClone(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float currentT, int nextIndex)
+    {
+        isClone = true;
+        this.p0 = p0;
+        this.p1 = p1;
+        this.p2 = p2;
+        this.p3 = p3;
+        this.t = currentT;
+        this.nextControlIndex = nextIndex;
+
+        currentHealth = maxHealth * 0.4f;
+        if (healthManager != null)
+        {
+            healthManager.CurrentHealth = currentHealth;
+        }
+
+        transform.position = CubicFast(p0, p1, p2, p3, t);
+
+        UpdateVisualOverlay();
     }
 
     #endregion
@@ -368,7 +406,7 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        if (pathPoints != null && pathPoints.Length >= 4)
+        if (!isClone && pathPoints != null && pathPoints.Length >= 4)
         {
             p0 = pathPoints[0].transform.position;
             p1 = pathPoints[1].transform.position;

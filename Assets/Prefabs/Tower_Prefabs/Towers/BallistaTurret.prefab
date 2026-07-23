@@ -112,7 +112,7 @@ MonoBehaviour:
   towerUpgradeCost: 15
   towerSellValue: 3
   towerRange: 5
-  towerDamage: 10
+  towerDamage: 5
   towerAttackSpeed: 2
   enemyLayer:
     serializedVersion: 2

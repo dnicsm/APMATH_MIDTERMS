@@ -33,10 +33,12 @@ public class ArashiBoss : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Camera mainCamera;
     private Color originalCamColor;
+    private EnemyHealthManager healthManager;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        healthManager = GetComponent<EnemyHealthManager>();
         mainCamera = Camera.main;
         if (mainCamera != null) originalCamColor = mainCamera.backgroundColor;
 
@@ -49,13 +51,21 @@ public class ArashiBoss : MonoBehaviour
 
     void Update()
     {
-        t += Time.deltaTime * phaseSpeeds[currentPhaseIndex];
-        t = Mathf.Clamp01(t);
-        transform.position = EnemyController.CubicFast(p0, p1, p2, p3, t);
 
-        if (t >= 1f)
+        bool canMove = (healthManager != null) ? healthManager.canMove : true;
+        float slowFactor = (healthManager != null) ? healthManager.currentSlowFactor : 1f;
+
+        if (canMove && pathPoints != null && pathPoints.Length >= 4)
         {
-            AdvancePath();
+            float currentSpeed = (currentPhaseIndex < phaseSpeeds.Length) ? phaseSpeeds[currentPhaseIndex] : phaseSpeeds[0];
+            t += Time.deltaTime * (currentSpeed * slowFactor);
+            t = Mathf.Clamp01(t);
+            transform.position = EnemyController.CubicFast(p0, p1, p2, p3, t);
+
+            if (t >= 1f)
+            {
+                AdvancePath();
+            }
         }
     }
 
@@ -75,7 +85,7 @@ public class ArashiBoss : MonoBehaviour
 
         if (currentPhaseIndex >= phaseMaxHealth.Length)
         {
-            Destroy(gameObject);
+            currentPhaseHealth = 0f;
             return;
         }
 
@@ -84,25 +94,34 @@ public class ArashiBoss : MonoBehaviour
 
         StartCoroutine(TransformationBlastRoutine());
         ApplyPhaseState();
+
+        if (healthManager != null)
+        {
+            healthManager.MaxHealth = phaseMaxHealth[currentPhaseIndex];
+            healthManager.CurrentHealth = currentPhaseHealth;
+            healthManager.UpdateSpriteColor();
+        }
+    }
+
+    public Color GetPhaseColor()
+    {
+        switch (currentPhase)
+        {
+            case BossPhase.Phase2_Enraged:
+                return new Color(1f, 0.3f, 0.3f, 1f);
+            case BossPhase.Phase3_Overload:
+                return new Color(1f, 0.9f, 0.2f, 1f);
+            case BossPhase.Phase1_Form:
+            default:
+                return Color.white;
+        }
     }
 
     private void ApplyPhaseState()
     {
-        switch (currentPhase)
+        if (spriteRenderer != null)
         {
-            case BossPhase.Phase1_Form:
-                if (spriteRenderer) spriteRenderer.color = Color.white;
-                break;
-
-            case BossPhase.Phase2_Enraged:
-
-                if (spriteRenderer) spriteRenderer.color = new Color(1f, 0.3f, 0.3f, 1f);
-                break;
-
-            case BossPhase.Phase3_Overload:
-
-                if (spriteRenderer) spriteRenderer.color = new Color(1f, 0.9f, 0.2f, 1f);
-                break;
+            spriteRenderer.color = GetPhaseColor();
         }
     }
 

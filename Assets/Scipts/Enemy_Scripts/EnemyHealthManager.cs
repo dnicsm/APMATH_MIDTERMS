@@ -13,7 +13,7 @@ public class EnemyHealthManager : MonoBehaviour
 
     [Header("Health Settings")]
     public float MaxHealth = 100f;
-    [SerializeField] private float CurrentHealth;
+    public float CurrentHealth;
 
     [Header("Movement & Status Factors")]
     public bool canMove = true;
@@ -92,7 +92,7 @@ public class EnemyHealthManager : MonoBehaviour
         bool invisible = isInvisible || (enemyControllerScript != null && enemyControllerScript.isInvisible);
         bool revealed = isLanternRevealed || (enemyControllerScript != null && enemyControllerScript.isLanternRevealed);
 
-        // Block damage ONLY if invisible AND NOT revealed by Lantern
+        // Invisible targets block incoming direct hits unless revealed by a Lantern
         if (invisible && !revealed)
         {
             if (sfx != null) sfx.ShadowSFX();
@@ -137,6 +137,10 @@ public class EnemyHealthManager : MonoBehaviour
         if (enemyControllerScript != null)
         {
             enemyControllerScript.currentHealth = CurrentHealth;
+            if (enemyControllerScript.enemyType == EnemyType.SmokeBomber)
+            {
+                enemyControllerScript.CheckSmokeBombTrigger();
+            }
         }
 
         if (CurrentHealth == 0 && !enemyDead)
@@ -224,7 +228,13 @@ public class EnemyHealthManager : MonoBehaviour
             alpha = 0.6f;
         }
 
-        return new Color(1f, 1f, 1f, alpha);
+        Color baseColor = Color.white;
+        if (bossScript != null)
+        {
+            baseColor = bossScript.GetPhaseColor();
+        }
+
+        return new Color(baseColor.r, baseColor.g, baseColor.b, alpha);
     }
 
     #endregion

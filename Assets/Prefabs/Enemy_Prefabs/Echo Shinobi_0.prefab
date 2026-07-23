@@ -121,8 +121,8 @@ MonoBehaviour:
   towerLayer:
     serializedVersion: 2
     m_Bits: 1
-  cloneInterval: 1
-  isClone: 1
+  cloneInterval: 5
+  isClone: 0
   canMove: 1
   currentSlowFactor: 1
 --- !u!114 &-5473847266658079271
