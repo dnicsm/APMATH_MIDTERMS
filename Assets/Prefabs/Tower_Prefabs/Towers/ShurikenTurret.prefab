@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 15
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 4524575746520727388, guid: 277dbd52a0afe4026ad24c28ecefff3d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,13 +105,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerBehaviors
   towerType: 4
-  towerLevel: 0
-  towerCost: 0
-  towerUpgradeCost: 0
+  towerLevel: 1
+  towerCost: 20
+  towerUpgradeCost: 20
   towerSellValue: 0
-  towerRange: 0
-  towerDamage: 0
-  towerAttackSpeed: 0
+  towerRange: 8
+  towerDamage: 3
+  towerAttackSpeed: 2
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   lanternConePrefab: {fileID: 0}
   bellRingPrefab: {fileID: 0}
   bellRingDuration: 0.3
-  shurikenPrefab: {fileID: 0}
+  shurikenPrefab: {fileID: 3183417239141182428, guid: 3b3189942f193444ebb3a1e64f970a4a, type: 3}
   ballistaBoltPrefab: {fileID: 0}
   ballistaBoltDuration: 0.2
   poisonDartPrefab: {fileID: 0}

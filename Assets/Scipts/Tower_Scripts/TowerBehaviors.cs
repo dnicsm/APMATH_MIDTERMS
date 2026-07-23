@@ -33,11 +33,16 @@ public class TowerBehaviors : MonoBehaviour
     public GameObject poisonDartPrefab;
     public float poisonDartDuration = 0.2f;
 
+    [Header("Visual Scaling")]
+    [Tooltip("How much the tower scales up per level (e.g., 0.2 means +20% size per level)")]
+    public float scaleIncreasePerLevel = 0.15f; 
+    
+    // Store the initial scale so we can calculate exact growth reliably
+    private Vector3 initialScale;
+
     private float attackCooldownTimer;
     private HashSet<GameObject> buffedEnemies = new HashSet<GameObject>();
-
     private GameObject activeLanternCone;
-
     private float saboteurDebuffTimer = 0f;
 
     void Start()
@@ -45,9 +50,10 @@ public class TowerBehaviors : MonoBehaviour
         attackCooldownTimer = towerAttackSpeed;
         towerLevel = 1;
         UpdateSellValue();
-    }
 
-    
+        // Capture the starting scale of the GameObject (or you can target a specific child SpriteRenderer)
+        initialScale = transform.localScale;
+    }
 
     #region Upgrade Management
     [ContextMenu("Upgrade Tower")] 
@@ -60,7 +66,7 @@ public class TowerBehaviors : MonoBehaviour
         }
 
         towerLevel++;
-        Debug.Log(towerLevel);
+        Debug.Log($"Upgrading to level: {towerLevel}");
 
         towerDamage += towerDamage / 2f;
         towerRange += towerRange / 2f;
@@ -71,6 +77,7 @@ public class TowerBehaviors : MonoBehaviour
         towerUpgradeCost += towerUpgradeCost / 2;
 
         UpdateSellValue();
+        UpdateTowerVisualSize(); // <-- Call the new scaling function here
 
         Debug.Log($"{gameObject.name} upgraded to Level {towerLevel}!");
     }
@@ -78,6 +85,22 @@ public class TowerBehaviors : MonoBehaviour
     public void UpdateSellValue()
     {
         towerSellValue = (int)(towerCost - (towerCost / 1.5f));
+    }
+
+    // --- NEW FUNCTION: Scale the sprite ---
+    private void UpdateTowerVisualSize()
+    {
+        // Calculate the new scale multiplier based on current level
+        // Level 1 = 1.0 multiplier
+        // Level 2 = 1.0 + (0.15 * 1) = 1.15
+        // Level 3 = 1.0 + (0.15 * 2) = 1.30
+        float scaleMultiplier = 1f + (scaleIncreasePerLevel * (towerLevel - 1));
+        
+        // Apply the new scale relative to the original starting scale
+        transform.localScale = initialScale * scaleMultiplier;
+        
+        // Optional: If you only want to scale a child object containing the sprite, 
+        // you would replace 'transform.localScale' with 'spriteRendererTransform.localScale'
     }
     #endregion
 
@@ -416,9 +439,6 @@ public class TowerBehaviors : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawRay(transform.position, (Vector3)facingDirection * 2f);
     }
-
-    
-
 }
 
 public enum TowerType

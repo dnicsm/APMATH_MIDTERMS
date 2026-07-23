@@ -284,38 +284,67 @@ public class EnemyController : MonoBehaviour
 
     #endregion
 
-    #region For towers
+#region For towers
 
-    public bool IsTargetable()
-    {
-        return !isInvisible || isLanternRevealed;
-    }
+public bool IsTargetable()
+{
+    return !isInvisible || isLanternRevealed;
+}
 
-    public void RevealInvisible(bool status)
-    {
-        isLanternRevealed = status;
-        if (healthManager != null) healthManager.isLanternRevealed = status;
-        UpdateVisualOverlay();
-    }
+public void RevealInvisible(bool status)
+{
+    isLanternRevealed = status;
+    if (healthManager != null) healthManager.isLanternRevealed = status;
+    UpdateVisualOverlay();
+}
 
-    public void ApplySlow(float slowFactor)
-    {
-        currentSlowFactor = slowFactor;
-    }
+// --- WIND FAN HANDLERS ---
 
-    public void ApplyStun(float duration)
-    {
-        StartCoroutine(StunRoutine(duration));
-    }
+/// <summary>
+/// Pushes back the enemy along the path (reduces t).
+/// </summary>
+public void ApplyPushback(Vector2 pushForce)
+{
+    // Push back 't' along the Bezier curve
+    float pushbackMagnitude = pushForce.magnitude * 0.05f; 
+    t = Mathf.Max(0f, t - pushbackMagnitude);
+}
 
-    private IEnumerator StunRoutine(float duration)
-    {
-        canMove = false;
-        yield return new WaitForSeconds(duration);
-        canMove = true;
-    }
+/// <summary>
+/// Applies a temporary slow that reverts back after a duration.
+/// </summary>
+public void ApplySlowWithDuration(object[] args)
+{
+    float slowFactor = (float)args[0];
+    float duration = (float)args[1];
+    StartCoroutine(SlowRoutine(slowFactor, duration));
+}
 
-    #endregion
+private IEnumerator SlowRoutine(float slowFactor, float duration)
+{
+    currentSlowFactor = slowFactor;
+    yield return new WaitForSeconds(duration);
+    currentSlowFactor = 1f; // Reset to normal speed
+}
+
+public void ApplySlow(float slowFactor)
+{
+    currentSlowFactor = slowFactor;
+}
+
+public void ApplyStun(float duration)
+{
+    StartCoroutine(StunRoutine(duration));
+}
+
+private IEnumerator StunRoutine(float duration)
+{
+    canMove = false;
+    yield return new WaitForSeconds(duration);
+    canMove = true;
+}
+
+#endregion
 
     #region Path Logic
     private void InitializePath()

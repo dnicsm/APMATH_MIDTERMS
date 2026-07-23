@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 15
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -7856104610103982474, guid: f0bfb074500974863b1426d38e01fd74, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,19 +105,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerBehaviors
   towerType: 0
-  towerLevel: 0
-  towerCost: 0
-  towerUpgradeCost: 0
+  towerLevel: 1
+  towerCost: 15
+  towerUpgradeCost: 15
   towerSellValue: 0
-  towerRange: 0
-  towerDamage: 0
-  towerAttackSpeed: 0
+  towerRange: 10
+  towerDamage: 5
+  towerAttackSpeed: 2
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
   facingDirection: {x: 0, y: 0}
-  spikePrefab: {fileID: 0}
-  spikeDuration: 0.5
+  spikePrefab: {fileID: 3815030252341796646, guid: b47f3aecae0c54405afe6495b209b826, type: 3}
+  spikeDuration: 1
   windPrefab: {fileID: 0}
   windSpriteDuration: 0.4
   lanternConePrefab: {fileID: 0}

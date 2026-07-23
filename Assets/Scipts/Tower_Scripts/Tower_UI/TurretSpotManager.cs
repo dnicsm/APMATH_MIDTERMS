@@ -27,7 +27,6 @@ public class TurretSpotManager : MonoBehaviour
     {
         HandleHover();
         HandleInput();
-        
     }
 
     void HandleHover()
@@ -89,9 +88,23 @@ public class TurretSpotManager : MonoBehaviour
             GameObject prefab = TurretPlacer.Instance.GetSelectedTurret();
             if (prefab == null) return;
 
-            Quaternion rot = TurretPlacer.Instance.GetSelectedRotation();
-            
-            GameObject placedTurret = spot.PlaceTurret(prefab, rot);
+            // 1. Calculate the chosen facing direction vector from the indicator rotation
+            // (Assuming 0 deg rotation = Up)
+            Quaternion placementRot = TurretPlacer.Instance.GetSelectedRotation();
+            Vector2 selectedFacingDir = placementRot * Vector2.up;
+
+            // 2. Instantiate tower upright (Quaternion.identity)
+            GameObject placedTurret = spot.PlaceTurret(prefab, Quaternion.identity);
+
+            // 3. Pass the facing direction directly to the tower's behavior component
+            if (placedTurret != null)
+            {
+                TowerBehaviors towerBehavior = placedTurret.GetComponent<TowerBehaviors>();
+                if (towerBehavior != null)
+                {
+                    towerBehavior.facingDirection = selectedFacingDir;
+                }
+            }
 
             TurretPlacer.Instance.ClearSelection();
         }

@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 15
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: -5700130339897863647, guid: e54e4cb5bc98247f69cb111671cdb39b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,26 +105,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerBehaviors
   towerType: 3
-  towerLevel: 0
-  towerCost: 0
-  towerUpgradeCost: 0
+  towerLevel: 1
+  towerCost: 20
+  towerUpgradeCost: 20
   towerSellValue: 0
-  towerRange: 0
+  towerRange: 7
   towerDamage: 0
-  towerAttackSpeed: 0
+  towerAttackSpeed: 2
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
   facingDirection: {x: 0, y: 0}
-  spikePrefab: {fileID: 0}
+  spikePrefab: {fileID: 3815030252341796646, guid: b47f3aecae0c54405afe6495b209b826, type: 3}
   spikeDuration: 0.5
-  windPrefab: {fileID: 0}
+  windPrefab: {fileID: 1367656669682615856, guid: bd67cf891eaa34a4b889749cc482639d, type: 3}
   windSpriteDuration: 0.4
-  lanternConePrefab: {fileID: 0}
-  bellRingPrefab: {fileID: 0}
+  lanternConePrefab: {fileID: 1416970153606333641, guid: b935c9ec993bd4ec58602a1ce832664e, type: 3}
+  bellRingPrefab: {fileID: 3383704847430480811, guid: 757753e914e1f43888d6a26d6e614e5c, type: 3}
   bellRingDuration: 0.3
-  shurikenPrefab: {fileID: 0}
-  ballistaBoltPrefab: {fileID: 0}
+  shurikenPrefab: {fileID: 3183417239141182428, guid: 3b3189942f193444ebb3a1e64f970a4a, type: 3}
+  ballistaBoltPrefab: {fileID: 6802586095047111188, guid: 82a6fa804f34346ea800e670502aad06, type: 3}
   ballistaBoltDuration: 0.2
-  poisonDartPrefab: {fileID: 0}
+  poisonDartPrefab: {fileID: 6802586095047111188, guid: 82a6fa804f34346ea800e670502aad06, type: 3}
   poisonDartDuration: 0.2

@@ -1,0 +1,650 @@
+fileFormatVersion: 2
+guid: 88e7bf584046e44a5adee4058a1714a6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2045956596387952146
+    second: Wind Breath_0
+  - first:
+      213: 3283152104705337744
+    second: Wind Breath_1
+  - first:
+      213: 4209144898509603962
+    second: Wind Breath_2
+  - first:
+      213: 2938109388806623659
+    second: Wind Breath_3
+  - first:
+      213: -7918136104106846039
+    second: Wind Breath_4
+  - first:
+      213: 1535542170204786419
+    second: Wind Breath_5
+  - first:
+      213: 3280253822059527551
+    second: Wind Breath_6
+  - first:
+      213: 4279797404015137989
+    second: Wind Breath_7
+  - first:
+      213: -8745193939683703791
+    second: Wind Breath_8
+  - first:
+      213: -191023837714201846
+    second: Wind Breath_9
+  - first:
+      213: 7884627008846995330
+    second: Wind Breath_10
+  - first:
+      213: -3730330959242254770
+    second: Wind Breath_11
+  - first:
+      213: -8655506930842377026
+    second: Wind Breath_12
+  - first:
+      213: -8108660619646981866
+    second: Wind Breath_13
+  - first:
+      213: 2112430968547462498
+    second: Wind Breath_14
+  - first:
+      213: -7082829290517332591
+    second: Wind Breath_15
+  - first:
+      213: -7631150864763214589
+    second: Wind Breath_16
+  - first:
+      213: -3209912776133047768
+    second: Wind Breath_17
+  - first:
+      213: -1725919626025709256
+    second: Wind Breath_18
+  - first:
+      213: 6934258379777877553
+    second: Wind Breath_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Wind Breath_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7
+        width: 54
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21632993fa2b46c10800000000000000
+      internalID: 2045956596387952146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_1
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 8
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 099a980c179109d20800000000000000
+      internalID: 3283152104705337744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_2
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 4
+        width: 33
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7400d3fbf2e96a30800000000000000
+      internalID: 4209144898509603962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_3
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 1
+        width: 47
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba11f0f1ce246c820800000000000000
+      internalID: 2938109388806623659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_4
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 5
+        width: 11
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a814875a212d1290800000000000000
+      internalID: -7918136104106846039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_5
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 0
+        width: 36
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fe40b8d7775f4510800000000000000
+      internalID: 1535542170204786419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_6
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 3
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7db9fcb87dc58d20800000000000000
+      internalID: 3280253822059527551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_7
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 6
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c416f84015e46b30800000000000000
+      internalID: 4279797404015137989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_8
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 0
+        width: 45
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11401452274d2a680800000000000000
+      internalID: -8745193939683703791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_9
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 6
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a03c969e4d8595df0800000000000000
+      internalID: -191023837714201846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_10
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 3
+        width: 30
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28f96c07d72db6d60800000000000000
+      internalID: 7884627008846995330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_11
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 3
+        width: 39
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4629b7b1c33b3cc0800000000000000
+      internalID: -3730330959242254770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_12
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 4
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb465342e4671e780800000000000000
+      internalID: -8655506930842377026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_13
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 4
+        width: 13
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6192eb1c020487f80800000000000000
+      internalID: -8108660619646981866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_14
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 7
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26d4ec416ccd05d10800000000000000
+      internalID: 2112430968547462498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_15
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 11
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19d7bf5694cb4bd90800000000000000
+      internalID: -7082829290517332591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_16
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 10
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 305af5658b4b81690800000000000000
+      internalID: -7631150864763214589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_17
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 10
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82a0a9246591473d0800000000000000
+      internalID: -3209912776133047768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_18
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 3
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 831dcd39e3d4c08e0800000000000000
+      internalID: -1725919626025709256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Breath_19
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 3
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 136af63d14f6b3060800000000000000
+      internalID: 6934258379777877553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Wind Breath_0: 2045956596387952146
+      Wind Breath_1: 3283152104705337744
+      Wind Breath_10: 7884627008846995330
+      Wind Breath_11: -3730330959242254770
+      Wind Breath_12: -8655506930842377026
+      Wind Breath_13: -8108660619646981866
+      Wind Breath_14: 2112430968547462498
+      Wind Breath_15: -7082829290517332591
+      Wind Breath_16: -7631150864763214589
+      Wind Breath_17: -3209912776133047768
+      Wind Breath_18: -1725919626025709256
+      Wind Breath_19: 6934258379777877553
+      Wind Breath_2: 4209144898509603962
+      Wind Breath_3: 2938109388806623659
+      Wind Breath_4: -7918136104106846039
+      Wind Breath_5: 1535542170204786419
+      Wind Breath_6: 3280253822059527551
+      Wind Breath_7: 4279797404015137989
+      Wind Breath_8: -8745193939683703791
+      Wind Breath_9: -191023837714201846
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

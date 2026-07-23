@@ -5,7 +5,7 @@ public class RicochetShuriken : MonoBehaviour
 {
     public float speed = 12f;
     public float rotationSpeed = 720f;
-    public float bounceRange = 4.0f;
+    public float bounceRange = 7f;
 
     private GameObject currentTarget;
     private float damage;
