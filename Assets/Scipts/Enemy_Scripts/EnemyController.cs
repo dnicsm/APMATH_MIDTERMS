@@ -22,8 +22,9 @@ public class EnemyController : MonoBehaviour
     public float damageToPlayer = 3f;
 
     [Header("Stealth & Visibility Settings")]
-    public bool isInvisible = false;
+    public bool isInvisible = true;
     public bool isLanternRevealed = false;
+    private float lanternRevealTimer = 0f;
 
     [Header("Saboteur Aura Setup")]
     public float saboteurRadius = 4.0f;
@@ -39,24 +40,24 @@ public class EnemyController : MonoBehaviour
     private int nextControlIndex = 3;
 
     private SpriteRenderer spriteRenderer;
-    private Color originalColor;
-
     private bool hasTriggeredSmoke = false;
     private float baseSpeed;
 
     public bool canMove = true;
     public float currentSlowFactor = 1f;
 
-    // References
     private EnemyHealthManager healthManager;
     private EnemySFX sfx;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null) originalColor = spriteRenderer.color;
+        
+        if (spriteRenderer != null && spriteRenderer.sortingOrder <= 0)
+        {
+            spriteRenderer.sortingOrder = 2;
+        }
 
-        // Automatically hook into Health and SFX scripts
         healthManager = GetComponent<EnemyHealthManager>();
         sfx = GetComponent<EnemySFX>();
 
@@ -74,7 +75,6 @@ public class EnemyController : MonoBehaviour
             case EnemyType.ShadowNinja:
                 isInvisible = true;
                 if (healthManager != null) healthManager.isInvisible = true;
-                UpdateVisualOverlay();
                 break;
 
             case EnemyType.EchoShinobi:
@@ -85,108 +85,91 @@ public class EnemyController : MonoBehaviour
                 else
                 {
                     currentHealth = maxHealth * 0.4f;
-                    if (spriteRenderer) spriteRenderer.color = new Color(0.4f, 0.7f, 1f, 0.6f);
                 }
                 break;
 
             case EnemyType.Saboteur:
-                if (spriteRenderer) spriteRenderer.color = new Color(0.8f, 0.3f, 1f, 1f); // Purple tint aura
                 CreateRedAura();
                 break;
-
-            case EnemyType.SmokeBomber:
-                break;
         }
+
+        UpdateVisualOverlay();
     }
 
-    #region Aura
-    private void CreateRedAura()
+    public void PingLanternLight()
     {
-        GameObject auraObj = new GameObject("SaboteurRedAura");
-        auraObj.transform.SetParent(transform);
-        auraObj.transform.localPosition = Vector3.zero;
+        lanternRevealTimer = 0.25f; 
+        isLanternRevealed = true;
 
-        SpriteRenderer auraSR = auraObj.AddComponent<SpriteRenderer>();
-
-        auraSR.sprite = GenerateCircleSprite();
-
-        auraSR.color = new Color(1f, 0f, 0f, 0.3f);
-
-        auraSR.sortingOrder = -1;
-
-        float diameter = saboteurRadius * 2f;
-        auraObj.transform.localScale = new Vector3(diameter, diameter, 1f);
-    }
-
-    private Sprite GenerateCircleSprite()
-    {
-        int resolution = 128;
-        Texture2D tex = new Texture2D(resolution, resolution);
-        Color[] colors = new Color[resolution * resolution];
-        Vector2 center = new Vector2(resolution / 2f, resolution / 2f);
-        float radius = resolution / 2f;
-
-        for (int y = 0; y < resolution; y++)
+        if (healthManager != null)
         {
-            for (int x = 0; x < resolution; x++)
-            {
-                float dist = Vector2.Distance(new Vector2(x, y), center);
-                if (dist <= radius)
-                {
-
-                    colors[y * resolution + x] = Color.white;
-                }
-                else
-                {
-
-                    colors[y * resolution + x] = Color.clear;
-                }
-            }
+            healthManager.isLanternRevealed = true;
         }
-
-        tex.SetPixels(colors);
-        tex.Apply();
-
-        return Sprite.Create(tex, new Rect(0, 0, resolution, resolution), new Vector2(0.5f, 0.5f), resolution);
     }
-
-    #endregion
 
     void Update()
     {
-        if (!canMove) return;
-
-        t += Time.deltaTime * speed * currentSlowFactor;
-        t = Mathf.Clamp01(t);
-        transform.position = CubicFast(p0, p1, p2, p3, t);
-
-        if (t >= 1f)
+        // --- 1. Path Movement Loop ---
+        if (canMove && pathPoints != null && pathPoints.Length >= 4)
         {
-            AdvancePath();
+            t += Time.deltaTime * (speed * currentSlowFactor);
+            transform.position = CubicFast(p0, p1, p2, p3, t);
+
+            if (t >= 1f)
+            {
+                AdvancePath();
+            }
         }
 
-        switch (enemyType)
+        // --- 2. Stealth & Light Detection ---
+        if (lanternRevealTimer > 0f)
         {
-            case EnemyType.SmokeBomber:
-                CheckSmokeBombTrigger();
-                UpdateVisualOverlay();
-                break;
-
-            case EnemyType.Saboteur:
-                ExecuteSaboteurAura();
-                break;
-
-            case EnemyType.ShadowNinja:
-                UpdateVisualOverlay();
-                break;
+            lanternRevealTimer -= Time.deltaTime;
+            isLanternRevealed = true;
+            if (healthManager != null) healthManager.isLanternRevealed = true;
         }
+        else
+        {
+            isLanternRevealed = false;
+            if (healthManager != null) healthManager.isLanternRevealed = false;
+        }
+
+        UpdateVisualOverlay();
+
+        // --- 3. Active Enemy Ability Ticks ---
+        if (enemyType == EnemyType.Saboteur)
+        {
+            ExecuteSaboteurAura();
+        }
+        else if (enemyType == EnemyType.SmokeBomber)
+        {
+            CheckSmokeBombTrigger();
+        }
+    }
+
+    public void UpdateVisualOverlay()
+    {
+        if (spriteRenderer == null) return;
+
+        float alpha = 1f;
+
+        // Ninja remains 100% opaque as long as revealed by Lantern
+        if (isInvisible && !isLanternRevealed)
+        {
+            alpha = 0.3f; // Invisible stealth state
+        }
+        else if (isClone)
+        {
+            alpha = 0.6f; // Echo clone state
+        }
+
+        spriteRenderer.color = new Color(1f, 1f, 1f, alpha);
     }
 
     #region Enemy Behaviors
 
     private void CheckSmokeBombTrigger()
     {
-        // Read actual health from HealthManager if attached, otherwise use local health
         float currentHp = (healthManager != null) ? healthManager.MaxHealth - (healthManager.MaxHealth - GetCurrentHealth()) : currentHealth;
         float maxHp = (healthManager != null) ? healthManager.MaxHealth : maxHealth;
 
@@ -199,7 +182,6 @@ public class EnemyController : MonoBehaviour
 
     private float GetCurrentHealth()
     {
-        // Access HealthManager's health safely
         if (healthManager != null)
         {
             return (float)typeof(EnemyHealthManager)
@@ -212,18 +194,71 @@ public class EnemyController : MonoBehaviour
     private IEnumerator ActivateSmokeBomb()
     {
         isInvisible = true;
-        if (healthManager != null) healthManager.isInvisible = true; // Sync with HealthManager
+        if (healthManager != null) healthManager.isInvisible = true; 
 
-        speed = baseSpeed * 1.8f; // Speed boost while stealthed
+        UpdateVisualOverlay();
+        if (healthManager != null) healthManager.UpdateSpriteColor();
 
-        if (sfx != null) sfx.SmokeSFX(); // Play smoke bomb sound effect
+        speed = baseSpeed * 1.8f; 
+        if (sfx != null) sfx.SmokeSFX(); 
 
-        yield return new WaitForSeconds(3.0f); // Stealth duration
+        yield return new WaitForSeconds(3.0f); 
 
         isInvisible = false;
         if (healthManager != null) healthManager.isInvisible = false;
 
+        UpdateVisualOverlay();
+        if (healthManager != null) healthManager.UpdateSpriteColor();
+
         speed = baseSpeed;
+    }
+
+    private void CreateRedAura()
+    {
+        GameObject auraObj = new GameObject("SaboteurRedAura");
+        auraObj.transform.SetParent(transform);
+        auraObj.transform.localPosition = Vector3.zero;
+
+        SpriteRenderer auraSR = auraObj.AddComponent<SpriteRenderer>();
+        auraSR.sprite = GenerateCircleSprite();
+        auraSR.color = new Color(1f, 0f, 0f, 0.35f); 
+
+        if (spriteRenderer != null)
+        {
+            auraSR.sortingLayerID = spriteRenderer.sortingLayerID;
+            auraSR.sortingOrder = spriteRenderer.sortingOrder - 1;
+        }
+        else
+        {
+            auraSR.sortingOrder = 1;
+        }
+
+        float diameter = saboteurRadius * 2f;
+        auraObj.transform.localScale = new Vector3(diameter, diameter, 1f);
+    }
+
+    private Sprite GenerateCircleSprite()
+    {
+        int resolution = 128;
+        Texture2D tex = new Texture2D(resolution, resolution, TextureFormat.RGBA32, false);
+        Color[] colors = new Color[resolution * resolution];
+        Vector2 center = new Vector2(resolution / 2f, resolution / 2f);
+        float radius = resolution / 2f;
+
+        for (int y = 0; y < resolution; y++)
+        {
+            for (int x = 0; x < resolution; x++)
+            {
+                float dist = Vector2.Distance(new Vector2(x, y), center);
+                colors[y * resolution + x] = (dist <= radius) ? Color.white : Color.clear;
+            }
+        }
+
+        tex.SetPixels(colors);
+        tex.Apply();
+        tex.filterMode = FilterMode.Bilinear;
+
+        return Sprite.Create(tex, new Rect(0, 0, resolution, resolution), new Vector2(0.5f, 0.5f), resolution);
     }
 
     private void ExecuteSaboteurAura()
@@ -237,26 +272,6 @@ public class EnemyController : MonoBehaviour
             {
                 tower.SendMessage("ApplySaboteurDebuff", 0.10f, SendMessageOptions.DontRequireReceiver);
             }
-        }
-    }
-
-    private void UpdateVisualOverlay()
-    {
-        if (spriteRenderer == null) return;
-
-        // Sync lantern reveal status from HealthManager if active
-        if (healthManager != null)
-        {
-            isLanternRevealed = healthManager.isLanternRevealed;
-        }
-
-        if (isInvisible && !isLanternRevealed)
-        {
-            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.7f); // Semi-transparent smoke overlay
-        }
-        else if (!isInvisible)
-        {
-            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
         }
     }
 
@@ -284,67 +299,60 @@ public class EnemyController : MonoBehaviour
 
     #endregion
 
-#region For towers
+    #region For towers
 
-public bool IsTargetable()
-{
-    return !isInvisible || isLanternRevealed;
-}
+    public bool IsTargetable()
+    {
+        bool invisible = isInvisible || (healthManager != null && healthManager.isInvisible);
+        bool revealed = isLanternRevealed || (healthManager != null && healthManager.isLanternRevealed);
+        return !invisible || revealed;
+    }
 
-public void RevealInvisible(bool status)
-{
-    isLanternRevealed = status;
-    if (healthManager != null) healthManager.isLanternRevealed = status;
-    UpdateVisualOverlay();
-}
+    public void RevealInvisible(bool status)
+    {
+        isLanternRevealed = status;
+        if (healthManager != null) healthManager.isLanternRevealed = status;
+        UpdateVisualOverlay();
+    }
 
-// --- WIND FAN HANDLERS ---
+    public void ApplyPushback(Vector2 pushForce)
+    {
+        float pushbackMagnitude = pushForce.magnitude * 0.05f; 
+        t = Mathf.Max(0f, t - pushbackMagnitude);
+    }
 
-/// <summary>
-/// Pushes back the enemy along the path (reduces t).
-/// </summary>
-public void ApplyPushback(Vector2 pushForce)
-{
-    // Push back 't' along the Bezier curve
-    float pushbackMagnitude = pushForce.magnitude * 0.05f; 
-    t = Mathf.Max(0f, t - pushbackMagnitude);
-}
+    public void ApplySlowWithDuration(object[] args)
+    {
+        float slowFactor = (float)args[0];
+        float duration = (float)args[1];
+        StartCoroutine(SlowRoutine(slowFactor, duration));
+    }
 
-/// <summary>
-/// Applies a temporary slow that reverts back after a duration.
-/// </summary>
-public void ApplySlowWithDuration(object[] args)
-{
-    float slowFactor = (float)args[0];
-    float duration = (float)args[1];
-    StartCoroutine(SlowRoutine(slowFactor, duration));
-}
+    private IEnumerator SlowRoutine(float slowFactor, float duration)
+    {
+        currentSlowFactor = slowFactor;
+        yield return new WaitForSeconds(duration);
+        currentSlowFactor = 1f; 
+    }
 
-private IEnumerator SlowRoutine(float slowFactor, float duration)
-{
-    currentSlowFactor = slowFactor;
-    yield return new WaitForSeconds(duration);
-    currentSlowFactor = 1f; // Reset to normal speed
-}
+    public void ApplySlow(float slowFactor)
+    {
+        currentSlowFactor = slowFactor;
+    }
 
-public void ApplySlow(float slowFactor)
-{
-    currentSlowFactor = slowFactor;
-}
+    public void ApplyStun(float duration)
+    {
+        StartCoroutine(StunRoutine(duration));
+    }
 
-public void ApplyStun(float duration)
-{
-    StartCoroutine(StunRoutine(duration));
-}
+    private IEnumerator StunRoutine(float duration)
+    {
+        canMove = false;
+        yield return new WaitForSeconds(duration);
+        canMove = true;
+    }
 
-private IEnumerator StunRoutine(float duration)
-{
-    canMove = false;
-    yield return new WaitForSeconds(duration);
-    canMove = true;
-}
-
-#endregion
+    #endregion
 
     #region Path Logic
     private void InitializePath()

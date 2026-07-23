@@ -1,5 +1,17 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+
+public enum TowerType
+{
+    Bamboo_Spiker,
+    Wind_Fan_Pagoda,
+    Lantern_Tower,
+    Bell_Tower,
+    Shuriken_Launcher,
+    Balista,
+    Poison_Dart_Blowpipe
+}
 
 public class TowerBehaviors : MonoBehaviour
 {
@@ -37,11 +49,10 @@ public class TowerBehaviors : MonoBehaviour
     [Tooltip("How much the tower scales up per level (e.g., 0.2 means +20% size per level)")]
     public float scaleIncreasePerLevel = 0.15f; 
     
-    // Store the initial scale so we can calculate exact growth reliably
     private Vector3 initialScale;
-
     private float attackCooldownTimer;
-    private HashSet<GameObject> buffedEnemies = new HashSet<GameObject>();
+    private float originalAttackSpeed;
+    private bool isSabotaged = false;
     private GameObject activeLanternCone;
     private float saboteurDebuffTimer = 0f;
 
@@ -51,7 +62,6 @@ public class TowerBehaviors : MonoBehaviour
         towerLevel = 1;
         UpdateSellValue();
 
-        // Capture the starting scale of the GameObject (or you can target a specific child SpriteRenderer)
         initialScale = transform.localScale;
     }
 
@@ -77,7 +87,7 @@ public class TowerBehaviors : MonoBehaviour
         towerUpgradeCost += towerUpgradeCost / 2;
 
         UpdateSellValue();
-        UpdateTowerVisualSize(); // <-- Call the new scaling function here
+        UpdateTowerVisualSize();
 
         Debug.Log($"{gameObject.name} upgraded to Level {towerLevel}!");
     }
@@ -87,26 +97,29 @@ public class TowerBehaviors : MonoBehaviour
         towerSellValue = (int)(towerCost - (towerCost / 1.5f));
     }
 
-    // --- NEW FUNCTION: Scale the sprite ---
     private void UpdateTowerVisualSize()
     {
-        // Calculate the new scale multiplier based on current level
-        // Level 1 = 1.0 multiplier
-        // Level 2 = 1.0 + (0.15 * 1) = 1.15
-        // Level 3 = 1.0 + (0.15 * 2) = 1.30
         float scaleMultiplier = 1f + (scaleIncreasePerLevel * (towerLevel - 1));
-        
-        // Apply the new scale relative to the original starting scale
         transform.localScale = initialScale * scaleMultiplier;
-        
-        // Optional: If you only want to scale a child object containing the sprite, 
-        // you would replace 'transform.localScale' with 'spriteRendererTransform.localScale'
     }
     #endregion
 
     void Update()
     {
         attackCooldownTimer -= Time.deltaTime;
+
+        if (saboteurDebuffTimer > 0f)
+        {
+            saboteurDebuffTimer -= Time.deltaTime;
+
+            if (saboteurDebuffTimer <= 0f && isSabotaged)
+            {
+                towerAttackSpeed = originalAttackSpeed;
+                isSabotaged = false;
+                Debug.Log($"<color=green>[Saboteur Debuff]</color> Expired on <b>{gameObject.name}</b>. " +
+                        $"Attack speed restored to {towerAttackSpeed:F2}s.");
+            }
+        }
 
         if (towerType == TowerType.Lantern_Tower)
         {
@@ -146,14 +159,20 @@ public class TowerBehaviors : MonoBehaviour
 
     public void ApplySaboteurDebuff(float reductionFactor)
     {
-        if (saboteurDebuffTimer <= 0f)
+        if (!isSabotaged)
         {
+            originalAttackSpeed = towerAttackSpeed;
             towerAttackSpeed += towerAttackSpeed * reductionFactor;
+            isSabotaged = true;
+
+            Debug.Log($"<color=orange>[Saboteur Debuff]</color> Applied to <b>{gameObject.name}</b>! " +
+                    $"Attack Delay increased from {originalAttackSpeed:F2}s to {towerAttackSpeed:F2}s.");
         }
+
         saboteurDebuffTimer = 0.5f; 
     }
 
-    private GameObject[] GetAllEnemies()
+    private GameObject[] GetAllEnemies(bool includeInvisible = false)
     {
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         List<GameObject> validTargets = new List<GameObject>();
@@ -163,7 +182,10 @@ public class TowerBehaviors : MonoBehaviour
             EnemyController advEnemy = enemy.GetComponent<EnemyController>();
             if (advEnemy != null)
             {
-                if (advEnemy.IsTargetable()) validTargets.Add(enemy);
+                if (includeInvisible || advEnemy.IsTargetable()) 
+                {
+                    validTargets.Add(enemy);
+                }
             }
             else
             {
@@ -238,52 +260,26 @@ public class TowerBehaviors : MonoBehaviour
     #region 3. Lantern Tower
     private void ExecuteLanternLogic()
     {
+        GameObject[] enemies = GetAllEnemies(includeInvisible: true);
+
         if (lanternConePrefab != null && activeLanternCone == null)
         {
             float angle = Mathf.Atan2(facingDirection.y, facingDirection.x) * Mathf.Rad2Deg;
             activeLanternCone = Instantiate(lanternConePrefab, transform.position, Quaternion.Euler(0, 0, angle), transform);
         }
 
-        GameObject[] enemies = GetAllEnemies();
         Vector2 origin = transform.position;
-        HashSet<GameObject> currentEnemiesInLight = new HashSet<GameObject>();
 
         foreach (GameObject enemy in enemies)
         {
             if (enemy == null) continue;
-            Vector2 enemyPos = enemy.transform.position;
 
-            if (Vector2.Distance(origin, enemyPos) <= towerRange)
+            // Any enemy inside the lantern's range is revealed 360 degrees
+            if (Vector2.Distance(origin, enemy.transform.position) <= towerRange)
             {
-                Vector2 dirToEnemy = (enemyPos - origin).normalized;
-                if (Vector2.Dot(dirToEnemy, facingDirection) > 0.5f)
-                {
-                    currentEnemiesInLight.Add(enemy);
-                    enemy.BroadcastMessage("RevealInvisible", true, SendMessageOptions.DontRequireReceiver);
-
-                    if (!buffedEnemies.Contains(enemy))
-                    {
-                        enemy.BroadcastMessage("SetDamageAmplification", true, SendMessageOptions.DontRequireReceiver);
-                        buffedEnemies.Add(enemy);
-                    }
-                }
+                enemy.BroadcastMessage("PingLanternLight", SendMessageOptions.DontRequireReceiver);
             }
         }
-
-        List<GameObject> toRemove = new List<GameObject>();
-        foreach (GameObject enemy in buffedEnemies)
-        {
-            if (!currentEnemiesInLight.Contains(enemy) || enemy == null)
-            {
-                if (enemy != null)
-                {
-                    enemy.BroadcastMessage("RevealInvisible", false, SendMessageOptions.DontRequireReceiver);
-                    enemy.BroadcastMessage("SetDamageAmplification", false, SendMessageOptions.DontRequireReceiver);
-                }
-                toRemove.Add(enemy);
-            }
-        }
-        foreach (GameObject r in toRemove) buffedEnemies.Remove(r);
     }
     #endregion
 
@@ -342,7 +338,7 @@ public class TowerBehaviors : MonoBehaviour
         return bestTarget;
     }
 
-    private System.Collections.IEnumerator FireShurikenBurst(GameObject initialTarget)
+    private IEnumerator FireShurikenBurst(GameObject initialTarget)
     {
         int totalShurikens = 3;
         float delayBetweenShurikens = 0.15f;
@@ -439,15 +435,4 @@ public class TowerBehaviors : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawRay(transform.position, (Vector3)facingDirection * 2f);
     }
-}
-
-public enum TowerType
-{
-    Bamboo_Spiker,
-    Wind_Fan_Pagoda,
-    Lantern_Tower,
-    Bell_Tower,
-    Shuriken_Launcher,
-    Balista,
-    Poison_Dart_Blowpipe
 }

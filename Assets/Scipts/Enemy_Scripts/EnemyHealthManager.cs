@@ -32,9 +32,11 @@ public class EnemyHealthManager : MonoBehaviour
     private SpriteRenderer enemySprite;
     private bool enemyDead = false;
 
+    [Header("Hit Feedback")]
+    public Color flashColor = new Color(1f, 0.6f, 0.6f, 1f);
+
     private bool isDamageAmplified = false;
     private float damageAmpMultiplier = 1.35f;
-    private bool isPoisoned = false;
 
     private Coroutine poisonCoroutine;
     private Coroutine stunCoroutine;
@@ -47,9 +49,19 @@ public class EnemyHealthManager : MonoBehaviour
 
         enemySprite = GetComponent<SpriteRenderer>();
 
-        if (GhostBar != null) ghostBarInitialScale = GhostBar.transform.localScale;
-        if (HealthBar != null) healthBarInitialScale = HealthBar.transform.localScale;
+        if (GhostBar != null) 
+        {
+            ghostBarInitialScale = GhostBar.transform.localScale;
+            if (ghostBarInitialScale.x <= 0) ghostBarInitialScale = Vector3.one;
+        }
 
+        if (HealthBar != null) 
+        {
+            healthBarInitialScale = HealthBar.transform.localScale;
+            if (healthBarInitialScale.x <= 0) healthBarInitialScale = Vector3.one;
+        }
+
+        if (MaxHealth <= 0) MaxHealth = 100f;
         CurrentHealth = MaxHealth;
 
         enemyControllerScript = GetComponent<EnemyController>();
@@ -66,7 +78,9 @@ public class EnemyHealthManager : MonoBehaviour
     public bool IsTargetable()
     {
         if (enemyDead) return false;
-        return !isInvisible || isLanternRevealed;
+        bool invisible = isInvisible || (enemyControllerScript != null && enemyControllerScript.isInvisible);
+        bool revealed = isLanternRevealed || (enemyControllerScript != null && enemyControllerScript.isLanternRevealed);
+        return !invisible || revealed;
     }
 
     #region Health & Damage Management
@@ -75,7 +89,11 @@ public class EnemyHealthManager : MonoBehaviour
     {
         if (CurrentHealth <= 0 || enemyDead) return;
 
-        if (isInvisible)
+        bool invisible = isInvisible || (enemyControllerScript != null && enemyControllerScript.isInvisible);
+        bool revealed = isLanternRevealed || (enemyControllerScript != null && enemyControllerScript.isLanternRevealed);
+
+        // Block damage ONLY if invisible AND NOT revealed by Lantern
+        if (invisible && !revealed)
         {
             if (sfx != null) sfx.ShadowSFX();
             return;
@@ -106,10 +124,9 @@ public class EnemyHealthManager : MonoBehaviour
 
         StartCoroutine(HitAnimation());
 
-        // Shrink the 2D HealthBar on the X-axis based on remaining HP percentage
-        if (HealthBar != null)
+        if (HealthBar != null && MaxHealth > 0)
         {
-            float healthPercent = CurrentHealth / MaxHealth;
+            float healthPercent = Mathf.Clamp01(CurrentHealth / MaxHealth);
             HealthBar.transform.localScale = new Vector3(
                 healthBarInitialScale.x * healthPercent, 
                 healthBarInitialScale.y, 
@@ -132,7 +149,6 @@ public class EnemyHealthManager : MonoBehaviour
     IEnumerator HitAnimation()
     {
         float counter = 0;
-        Color flashColor = isPoisoned ? new Color(0.6f, 0f, 0.6f) : Color.red;
 
         while (counter < 1f)
         {
@@ -156,8 +172,6 @@ public class EnemyHealthManager : MonoBehaviour
 
     IEnumerator EnemyDeath()
     {
-        Debug.Log("DEATH TRIGGERED");
-
         if (poisonCoroutine != null) StopCoroutine(poisonCoroutine);
         if (stunCoroutine != null) StopCoroutine(stunCoroutine);
         if (pushbackCoroutine != null) StopCoroutine(pushbackCoroutine);
@@ -173,8 +187,6 @@ public class EnemyHealthManager : MonoBehaviour
         }
 
         if (enemySprite != null) enemySprite.enabled = false;
-        
-        // Hide UI GameObjects on death
         if (HealthBar != null) HealthBar.SetActive(false);
         if (GhostBar != null) GhostBar.SetActive(false);
 
@@ -197,50 +209,40 @@ public class EnemyHealthManager : MonoBehaviour
 
     private Color GetBaseStatusColor()
     {
-        if (!canMove) return Color.gray; 
-        if (isPoisoned) return new Color(0.3f, 0.8f, 0.3f);
-        if (isDamageAmplified) return new Color(1f, 0.9f, 0.5f);
+        bool invisible = isInvisible || (enemyControllerScript != null && enemyControllerScript.isInvisible);
+        bool revealed = isLanternRevealed || (enemyControllerScript != null && enemyControllerScript.isLanternRevealed);
+        bool isClone = enemyControllerScript != null && enemyControllerScript.isClone;
 
-        if (bossScript != null)
+        float alpha = 1f;
+
+        if (invisible && !revealed)
         {
-            switch (bossScript.currentPhase)
-            {
-                case BossPhase.Phase2_Enraged: return new Color(1f, 0.3f, 0.3f, 1f); 
-                case BossPhase.Phase3_Overload: return new Color(1f, 0.9f, 0.2f, 1f); 
-                default: return Color.white;
-            }
+            alpha = 0.3f;
+        }
+        else if (isClone)
+        {
+            alpha = 0.6f;
         }
 
-        if (enemyControllerScript != null)
-        {
-            switch (enemyControllerScript.enemyType)
-            {
-                case EnemyType.ShadowNinja:
-                case EnemyType.SmokeBomber:
-                    if (isInvisible && !isLanternRevealed)
-                    {
-                        return new Color(0.7f, 0.7f, 0.7f, 0.7f); 
-                    }
-                    break;
-
-                case EnemyType.Saboteur:
-                    return new Color(0.8f, 0.3f, 1f, 1f); 
-
-                case EnemyType.EchoShinobi:
-                    if (enemyControllerScript.isClone)
-                    {
-                        return new Color(0.4f, 0.7f, 1f, 0.6f); 
-                    }
-                    break;
-            }
-        }
-
-        return Color.white;
+        return new Color(1f, 1f, 1f, alpha);
     }
 
     #endregion
 
-    #region Tower Interaction Messages (BroadcastMessage Targets)
+    #region Tower Interaction Messages
+
+    public void RevealInvisible(bool isRevealed)
+    {
+        isLanternRevealed = isRevealed;
+
+        if (enemyControllerScript != null)
+        {
+            enemyControllerScript.isLanternRevealed = isRevealed;
+            enemyControllerScript.UpdateVisualOverlay();
+        }
+
+        UpdateSpriteColor();
+    }
 
     public void ApplyPushback(Vector2 force)
     {
@@ -264,7 +266,6 @@ public class EnemyHealthManager : MonoBehaviour
     public void ApplySlow(float factor)
     {
         currentSlowFactor = factor;
-
         CancelInvoke(nameof(ResetSlowFactor));
         Invoke(nameof(ResetSlowFactor), 0.5f);
     }
@@ -275,23 +276,6 @@ public class EnemyHealthManager : MonoBehaviour
         UpdateSpriteColor();
     }
 
-    public void RevealInvisible(bool isRevealed)
-    {
-        isLanternRevealed = isRevealed;
-
-        if (enemyControllerScript != null)
-        {
-            enemyControllerScript.isLanternRevealed = isRevealed;
-        }
-
-        UpdateSpriteColor();
-
-        if (isRevealed)
-        {
-            Debug.Log("Stealth Broken by Lantern Light Cone!");
-        }
-    }
-
     public void SetDamageAmplification(bool active)
     {
         isDamageAmplified = active;
@@ -300,8 +284,6 @@ public class EnemyHealthManager : MonoBehaviour
 
     public void InterruptSkills()
     {
-        Debug.Log("Skill Interrupted by Bell Tower shockwave!");
-
         if (sfx != null) sfx.DebuffSFX();
 
         if (isInvisible && enemyControllerScript != null && enemyControllerScript.enemyType == EnemyType.SmokeBomber)
@@ -340,11 +322,8 @@ public class EnemyHealthManager : MonoBehaviour
 
     IEnumerator PoisonTickRoutine(float dps, float duration)
     {
-        isPoisoned = true;
         float elapsed = 0f;
         float tickInterval = 0.5f;
-
-        UpdateSpriteColor();
 
         while (elapsed < duration)
         {
@@ -356,7 +335,6 @@ public class EnemyHealthManager : MonoBehaviour
             elapsed += tickInterval;
         }
 
-        isPoisoned = false;
         UpdateSpriteColor();
     }
 
